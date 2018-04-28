@@ -9,6 +9,9 @@
 		li.completed{
 			text-decoration: line-through;
 		}
+		.m-r-10{
+			margin-right: 10px;
+		}
 	</style>
 </head>
 <body>
@@ -20,6 +23,7 @@
 					<li class="list-group-item" v-for="todo in todos" v-bind:class="{ 'completed' : todo.completed}">
 						{{todo.title}}
 						<button class="btn btn-warning btn-xs pull-right" v-on:click="deleteTodo(todo)">Delete</button>
+						<button class="btn btn-xs pull-right m-r-10" v-bind:class="{'btn-success' : todo.completed, 'btn-danger' : !todo.completed}" v-on:click="todoCompleted(todo)">{{todo.completed ? 'Completed' : 'Pending'}}</button>
 					</li>
 				</ul>
                 <div v-else>You don't have any Todos</div>
@@ -62,6 +66,9 @@ new Vue({
 		},
 		deleteTodo: function(todo){
 			this.todos.splice(todo, 1)
+		},
+		todoCompleted( todo ){
+			todo.completed = !todo.completed
 		}
 	}
 });
